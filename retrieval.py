@@ -229,39 +229,39 @@ if __name__ == "__main__":
     logger.addHandler(sh)
     # ########################## 测试1 ##########################
     # https://www.cs.toronto.edu/~kriz/cifar-100-python.tar.gz
-    # train_images, train_labels = load_cifar100(
-    #     os.path.join(os.curdir, "retriveal_dataset", "cifar-100-python",
-    #                  "train"), 500)
-    # test_images, test_labels = load_cifar100(
-    #     os.path.join(os.curdir, "retriveal_dataset", "cifar-100-python",
-    #                  "test"), 100)
-    # one_rand_list = np.random.choice(100, 1)
-    # one_test_img_list = test_images[one_rand_list]
+    train_images, train_labels = load_cifar100(
+        os.path.join(os.curdir, "retriveal_dataset", "cifar-100-python",
+                     "train"), 500)
+    test_images, test_labels = load_cifar100(
+        os.path.join(os.curdir, "retriveal_dataset", "cifar-100-python",
+                     "test"), 100)
+    one_rand_list = np.random.choice(100, 1)
+    one_test_img_list = test_images[one_rand_list]
 
-    # expected_result_num = 3
-    # num_centers = 100
-    # search_result_indexes = retriveal(train_images,
-    #                                   one_test_img_list[0],
-    #                                   num_centers=num_centers,
-    #                                   num_close=expected_result_num)
+    expected_result_num = 3
+    num_centers = 100
+    search_result_indexes = retriveal(train_images,
+                                      one_test_img_list[0],
+                                      num_centers=num_centers,
+                                      num_close=expected_result_num)
 
     # # 绘图部分
-    # fig, axs = plt.subplots(nrows=1,
-    #                         ncols=expected_result_num + 1,
-    #                         figsize=(10, 1.5))
-    # for i in range(expected_result_num + 1):
-    #     axs[i].axis("off")
-    #     if i == 0: # 每一行的第一张图放原图,后面放结果图
-    #         axs[i].set_title("origin: " + str(test_labels[one_rand_list]))
-    #         axs[i].imshow(np.transpose(one_test_img_list[0], (1, 2, 0)))
-    #     else:
-    #         axs[i].set_title(
-    #             str(search_result_indexes[i - 1]) + ": " +
-    #             str(train_labels[search_result_indexes[i - 1]]))
-    #         axs[i].imshow(
-    #             np.transpose(train_images[search_result_indexes[i - 1]],
-    #                          (1, 2, 0)))
-    # plt.show()
+    fig, axs = plt.subplots(nrows=1,
+                            ncols=expected_result_num + 1,
+                            figsize=(10, 1.5))
+    for i in range(expected_result_num + 1):
+        axs[i].axis("off")
+        if i == 0: # 每一行的第一张图放原图,后面放结果图
+            axs[i].set_title("origin: " + str(test_labels[one_rand_list]))
+            axs[i].imshow(np.transpose(one_test_img_list[0], (1, 2, 0)))
+        else:
+            axs[i].set_title(
+                str(search_result_indexes[i - 1]) + ": " +
+                str(train_labels[search_result_indexes[i - 1]]))
+            axs[i].imshow(
+                np.transpose(train_images[search_result_indexes[i - 1]],
+                             (1, 2, 0)))
+    plt.show()
 
     # ########################## 测试2 ##########################
     # 开始准备训练数据
